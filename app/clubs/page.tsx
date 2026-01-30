@@ -1,3 +1,3 @@
 export default function ClubsPage() {
-  return <h1>Clubs and Association Pages</h1>;
+  return <h1>main page showing all the other pages</h1>;
 }
