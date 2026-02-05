@@ -12,6 +12,8 @@ export default function Navbar() {
     (pathname.startsWith(href) && href !== "/");
   const activeClass = "font-bold text-brand border-b-2  ";
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
 
   //  useState:Controls open/close: I want to rember whether the dropdown is open or closed open(flase)dropdown hideen and vice versa
 //  useRef + useEffect :Detects outside clicks
@@ -37,7 +39,8 @@ useEffect(() => {
 
 
   return (
-    <nav>
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white">
+
       <div className="max-w-6xl mx-auto px-4 py-4 border-b border-gray-400 flex items-center justify-between font-heading">
         
         {/* Logo */}
@@ -46,7 +49,7 @@ useEffect(() => {
         </Link>
 
         {/* Links */}
-        <div className="flex gap-8">
+        <div className="hidden md:flex gap-8 items-center">
           <Link
             href="/"
             className={isActive("/") ? activeClass : ""}
@@ -117,11 +120,41 @@ useEffect(() => {
         {/* Login */}
         <Link
           href="/login"
-          className="bg-red-500 text-white px-4 py-1 rounded-md"
+          className="hidden md:block bg-red-500 text-white px-4 py-1 rounded-md"
         >
           Login
         </Link>
+
+        {/* Mobile menu button */}
+<button
+  className="md:hidden text-2xl"
+  onClick={() => setMenuOpen((prev) => !prev)}
+>
+  ☰
+</button>
+
       </div>
+      {menuOpen && (
+  <div className="md:hidden px-4 pb-4 flex flex-col gap-4 border-b border-gray-300 bg-brand">
+    <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+    <Link href="/clubs" onClick={() => setMenuOpen(false)}>Clubs</Link>
+    <Link href="/notices" onClick={() => setMenuOpen(false)}>Notices</Link>
+    <Link href="/events" onClick={() => setMenuOpen(false)}>Events</Link>
+    <Link href="/support" onClick={() => setMenuOpen(false)}>Student Opportunities</Link>
+    <Link href="/lost-found" onClick={() => setMenuOpen(false)}>Lost & Found</Link>
+    <Link href="/about" onClick={() => setMenuOpen(false)}>About Egerton</Link>
+    <Link
+      href="/login"
+      onClick={() => setMenuOpen(false)}
+      className="bg-red-500 text-white px-4 py-2 rounded-md w-fit"
+    >
+      Login
+    </Link>
+  </div>
+)}
+
     </nav>
+
+    
   );
 }
