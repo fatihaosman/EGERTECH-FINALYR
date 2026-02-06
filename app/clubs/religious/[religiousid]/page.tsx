@@ -1,4 +1,4 @@
-import ClubDetailCard from "@/components/clubs/ClubDetailCard";
+import ClubDetailCard from "@/components/clubs/ClubDetail";
 type ReligiousClub = {
   name: string;
   description: string;

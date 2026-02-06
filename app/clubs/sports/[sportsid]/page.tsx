@@ -23,7 +23,7 @@
 //   );
 // }
 
-import ClubDetailCard from "@/components/clubs/ClubDetailCard";
+import ClubDetailCard from "@/components/clubs/ClubDetail";
 
 type SportsClub = {
   name: string;

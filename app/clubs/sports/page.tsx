@@ -94,8 +94,8 @@
 // }
 
 
-import CategoryHero from '@/components/clubs/CategoryHero';
-import ClubsGrid from "@/components/clubs/ClubsGrid";
+import CategoryHero from '@/components/clubs/Category';
+import ClubsGrid from "@/components/clubs/ClubGrid";
 
 
 const sportsClubs = [
