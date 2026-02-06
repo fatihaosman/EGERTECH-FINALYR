@@ -3,55 +3,67 @@ import ImageGallery from "@/components/imageGallery/imagegallery";
 export default function LostAndFoundPage() {
   const recentItems = [
     {
-      src: "/notice1.png",
+      src: "/lost1.jpeg",
       date: "Mar 20, 2026",
       alt: "Lost phone",
     },
     {
-      src: "/notice2.png",
+      src: "/lost2.jpeg",
       date: "Mar 22, 2026",
       alt: "Found ID card",
     },
     {
-      src: "/notice3.png",
+      src: "/lost3.jpeg",
       date: "Mar 24, 2026",
       alt: "Lost backpack",
     },
     {
-      src: "/notice4.png",
+      src: "/lost4.jpeg",
       date: "Mar 26, 2026",
       alt: "Found keys",
     },
+    {
+      src: "/lost5.jpeg",
+      date: "Mar 26, 2026",
+      alt: "Found keys",
+    },
+
+    {
+      src: "/lost6.jpeg",
+      date: "Mar 26, 2026",
+      alt: "Found keys",
+    },
+
   ];
 
   const olderItems = [
     {
-      src: "/notice1.png",
+      src: "/oder1.jpeg",
       date: "Mar 18, 2026",
       alt: "Lost calculator",
     },
     {
-      src: "/notice2.png",
+      src: "/oder2.jpeg",
       date: "Mar 17, 2026",
       alt: "Found charger",
     },
     {
-      src: "/notice3.png",
+      src: "/order3.jpg",
       date: "Mar 16, 2026",
       alt: "Lost notebook",
     },
     {
-      src: "/notice4.png",
+      src: "/order4.jpeg",
       date: "Mar 15, 2026",
       alt: "Found wallet",
     },
     {
-      src: "/notice5.png",
+      src: "/order5.jpeg",
       date: "Mar 14, 2026",
       alt: "Lost umbrella",
     },
     {
-      src: "/notice6.png",
+      src: "/oder6.jpeg",
       date: "Mar 13, 2026",
       alt: "Found water bottle",
     },
@@ -63,7 +75,7 @@ export default function LostAndFoundPage() {
 
         {/* RECENT LOST & FOUND */}
         <div>
-          <span className="inline-block mb-4 px-4 py-1 text-sm font-semibold bg-brand-accent text-white rounded-full">
+          <span className="inline-block mb-4 px-4 py-1 text-sm font-semibold bg-brand text-white rounded-full">
             Recent
           </span>
           <ImageGallery items={recentItems} />
@@ -71,7 +83,7 @@ export default function LostAndFoundPage() {
 
         {/* OLDER ITEMS */}
         <div>
-          <span className="inline-block mb-4 px-4 py-1 text-sm font-semibold bg-brand-accent text-white rounded-full">
+          <span className="inline-block mb-4 px-4 py-1 text-sm font-semibold bg-brand text-white rounded-full">
             Earlier Posts
           </span>
           <ImageGallery items={olderItems} />

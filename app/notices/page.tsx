@@ -22,6 +22,21 @@ export default function NoticesPage() {
     date: "Mar 26, 2026",
     alt: "Hostel allocation",
   },
+   {
+    src: "/notice5.jpeg",
+    date: "Mar 26, 2026",
+    alt: "Hostel allocation",
+  },
+   {
+    src: "/notice6.jpeg",
+    date: "Mar 26, 2026",
+    alt: "Hostel allocation",
+  },
+   {
+    src: "/notice7.jpeg",
+    date: "Mar 26, 2026",
+    alt: "Hostel allocation",
+  },
 ];
 const scienceNotices= [
   {
@@ -64,7 +79,7 @@ const scienceNotices= [
 
         {/* OVERALL NEWS */}
         <div>
-          <span className="inline-block mb-4 px-4 py-1 text-sm font-semibold bg-brand-accent text-white rounded-full">
+          <span className="inline-block mb-4 px-4 py-1 text-sm font-semibold bg-brand text-white rounded-full">
             Overall
           </span>
           <ImageGallery items={overallNotices} />
@@ -72,7 +87,7 @@ const scienceNotices= [
 
         {/* FACULTY OF SCIENCE */}
         <div>
-          <span className="inline-block mb-4 px-4 py-1 text-sm font-semibold bg-brand-accent text-white rounded-full">
+          <span className="inline-block mb-4 px-4 py-1 text-sm font-semibold bg-brand text-white rounded-full">
 
             Faculty of Science
           </span>

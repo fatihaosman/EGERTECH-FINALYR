@@ -159,21 +159,25 @@ export default function AboutEgertonPage() {
       </section>
       {/* 7️⃣ A glimpse into life at Egerton University */}
       <section className="text-center mt-10 pb-10">
-        <h2 className="text-2xl md:text-4xl font-heading font-bold text-brand mb-6">
-          A Glimpse into Life at Egerton University
-        </h2>
+    <h2 className="text-2xl md:text-4xl font-heading font-bold text-brand mb-6">
+      A Glimpse into Life at Egerton University
+    </h2>
 
-        {/* Video */}
-        <div className="flex justify-center">
-          <video
-            src="/egerton-life.mp4" // replace with your video file in public folder
-            controls
-            className="w-full max-w-4xl rounded-lg shadow-lg"
-          >
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </section>
+    <div className="flex justify-center">
+      <iframe
+        width="100%"
+        height="480"
+        className="max-w-4xl rounded-lg shadow-lg"
+        src="https://www.youtube.com/embed/3Oi-SvABd7Q
+"
+        title="Egerton Life"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+  </div>
+</section>
+
 
 
     </main>
