@@ -1,4 +1,4 @@
-import CategoryHero from '@/components/clubs/CategoryHero';
+import CategoryHero from "@/components/clubs/CategoryHero";
 import ClubsGrid from "@/components/clubs/ClubsGrid";
 
 const courseClubs = [
