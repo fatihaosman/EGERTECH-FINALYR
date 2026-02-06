@@ -3,54 +3,54 @@ import ImageGallery from "@/components/imageGallery/imagegallery";
 export default function NoticesPage() {
   const overallNotices = [
   {
-    src: "/notice1.png",
+    src: "/notice1.jpeg",
     date: "Mar 20, 2026",
     alt: "General campus notice",
   },
   {
-    src: "/notice2.png",
+    src: "/notice2.jpeg",
     date: "Mar 22, 2026",
     alt: "Library update",
   },
   {
-    src: "/notice3.png",
+    src: "/notice3.jpeg",
     date: "Mar 24, 2026",
     alt: "Fee deadline notice",
   },
   {
-    src: "/notice4.png",
+    src: "/notice4.jpeg",
     date: "Mar 26, 2026",
     alt: "Hostel allocation",
   },
 ];
 const scienceNotices= [
   {
-    src: "/notice1.png",
+    src: "/noticef1.jpeg",
     date: "Mar 20, 2026",
     alt: "General campus notice",
   },
   {
-    src: "/notice2.png",
+    src: "/noticef2.jpeg",
     date: "Mar 22, 2026",
     alt: "Library update",
   },
   {
-    src: "/notice3.png",
+    src: "/noticef3.jpeg",
     date: "Mar 24, 2026",
     alt: "Fee deadline notice",
   },
   {
-    src: "/notice4.png",
+    src: "/noticef4.jpeg",
     date: "Mar 26, 2026",
     alt: "Hostel allocation",
   },
    {
-    src: "/notice5.png",
+    src: "/noticef5.jpeg",
     date: "Mar 27, 2026",
     alt: "Hostel allocation",
   },
    {
-    src: "/notice6.png",
+    src: "/noticef6.jpeg",
     date: "Mar 28, 2026",
     alt: "Hostel allocation",
   },

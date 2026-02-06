@@ -18,7 +18,7 @@ const courseClubs = [
     name: "Agricultural Association",
     description:
       "The Agricultural Association is dedicated to students in the agriculture program. They organize educational trips, field visits, and engaging events that give students practical experience outside the classroom. The association fosters collaboration, learning, and networking opportunities within the agricultural community.",
-    href: "/clubs/courses/agricultural-association",
+    href: "/clubs/courses/agricultural",
   },
 ];
 

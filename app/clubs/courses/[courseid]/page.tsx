@@ -14,24 +14,24 @@ const coursesData: Record<string, CourseClub> = {
     name: "EUCCOSA",
     description:
       "The Egerton University Computer Science Students Association (EUCCOSA) provides a platform for computer science students to engage in hackathons, skill-building sessions, and practical workshops. Every Friday, students gather in the computer labs to learn new technologies, collaborate on projects, and meet guest speakers who share valuable industry insights.",
-    imageTop: "/euccosa-top.png",
-    imageBottom: "/euccosa-bottom.png",
+    imageTop: "/eucoosa1.jpg",
+    imageBottom: "/eucossa2.jpg",
     whatsappLink: "https://chat.whatsapp.com/euccosa",
   },
   euassa: {
     name: "EUASSA",
     description:
       "The Egerton University Actuarial Science Students Association (EUASSA) organizes events, workshops, and study sessions for actuarial science students. Members can access revision papers, statistical tables, and notes, and participate in occasional events that strengthen both theoretical knowledge and practical problem-solving skills.",
-    imageTop: "/euassa-top.png",
-    imageBottom: "/euassa-bottom.png",
+    imageTop: "/euassa-top.jpg",
+    imageBottom: "/euassa-bottom.jpg",
     whatsappLink: "https://chat.whatsapp.com/euassa",
   },
   agricultural: {
     name: "Agricultural Association",
     description:
       "The Agricultural Association is dedicated to students in the agriculture program. They organize educational trips, field visits, and engaging events that give students practical experience outside the classroom. The association fosters collaboration, learning, and networking opportunities within the agricultural community.",
-    imageTop: "/agriculture-top.png",
-    imageBottom: "/agriculture-bottom.png",
+    imageTop: "/agriculture-top.jpg",
+    imageBottom: "/agriculture-bottom.jpg",
   },
 };
 

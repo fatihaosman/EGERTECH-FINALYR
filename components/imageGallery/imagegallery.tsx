@@ -39,13 +39,13 @@ export default function ImageGallery({ items }: ImageGalleryProps) {
 
         {/* Image row */}
         <div
-          className="flex gap-4 overflow-hidden w-full transition-transform duration-300"
+          className="flex gap-12 overflow-hidden w-full transition-transform duration-300"
           style={{ transform: `translateX(-${scrollX}px)` }}
         >
           {items.map((item, idx) => (
             <div
               key={idx}
-              className="relative cursor-pointer flex-shrink-0 w-[150px] sm:w-[180px]"
+              className="relative cursor-pointer flex-shrink-0 w-[100px] sm:w-[180px]"
               onClick={() => setZoomIndex(idx)}
             >
               <Image

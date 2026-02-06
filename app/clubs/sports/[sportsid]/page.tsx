@@ -48,32 +48,32 @@ const sportsData: Record<string, SportsClub> = {
     name: "Cricket Club",
      description:
      "The Cricket Club is open to students who love cricket and team sports. All activities take place on the Pavilion sports ground, providing a fun and competitive environment for students to improve their skills and enjoy the spirit of the game.",
-    imageTop: "/cricket-top.png",
-    imageBottom: "/cricket-bottom.png",
+    imageTop: "/cricket-top.webp",
+    imageBottom: "/cricket-bottom.jpg",
     whatsappLink: "https://chat.whatsapp.com/example2",
   },
   tennis: {
     name: "Tennis Club",
     description:
      "The Tennis Club is for students who enjoy competitive or recreational tennis. Sessions are held on the dedicated tennis courts next to the Pavilion sports ground, offering ample space and professional facilities to practice, play matches, and socialize with fellow tennis enthusiasts.",
-    imageTop: "/tennis-top.png",
-    imageBottom: "/tennis-bottom.png",
+    imageTop: "/tennis-top.jpg",
+    imageBottom: "/tennis-bottom.jpg",
     contactNumber: "+254 700 111 222",
   },
    basketball: {
     name: "Basketball Club",
     description:
      "The Basketball Club welcomes students eager to play and learn basketball. Activities take place on the courts next to the Pavilion sports ground, providing a supportive environment to practice skills, play games, and enjoy team sports.",
-    imageTop: "/basketball-top.png",
-    imageBottom: "/basketball-bottom.png",
+    imageTop: "/basketball-top.jpg",
+    imageBottom: "/basketball-bottom.jpg",
     contactNumber: "+254 700 111 222",
   },
    karate: {
     name: "Karate Club",
     description:
      "The Karate Club offers an inclusive environment for students of all levels to learn and practice martial arts. Training is held at the Student Center, open to both boys and girls, focusing on skill development, discipline, and personal growth.",
-    imageTop: "/karate-top.png",
-    imageBottom: "/karate-bottom.png",
+    imageTop: "/karate-top.jpg",
+    imageBottom: "/karate-bottom.jpg",
     contactNumber: "+254 700 111 222",
   },
 };
