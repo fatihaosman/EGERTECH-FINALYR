@@ -51,6 +51,16 @@ body {
   border-bottom: 2px solid #dc2626; /* red on focus */
 }
 
+/* globals.css */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+
 
 
 

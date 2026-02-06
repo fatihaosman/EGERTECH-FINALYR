@@ -77,7 +77,7 @@ import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <section className="w-full min-h-screen bg-white flex justify-center mt-5">
+    <section className="w-full bg-white flex justify-center mt-5 mb-8">
       
       {/* HERO CONTAINER (same width as navbar) */}
       <div className="relative w-full max-w-6xl h-[300px] sm:h-[380px] lg:h-[460px]">

@@ -7,21 +7,21 @@ export default function EventsPage() {
       title: "Cultural Week",
       description:
         "Celebrate the vibrant traditions of our campus! Cultural Week brings together music, dance, art, and performances from various student clubs. Open to everyone on campus.",
-      image: "/cultural-week.jpeg",
+      image: "/event1.jpeg",
     },
     {
       date: "Fri, Apr 10, 2026",
       title: "Computer Science Hackathon",
       description:
         "A 48-hour coding challenge for students passionate about tech. Teams will compete to build innovative software solutions. While organized by the CS department, students from all fields are welcome to participate.",
-      image: "/hackathon.jpeg",
+      image: "/event2.jpeg",
     },
     {
       date: "Sat, Jun 20, 2026",
       title: "50th Graduation Ceremony",
       description:
         "Join us in celebrating the Class of 2026! Graduation day will include speeches, awards, and the conferring of degrees. Family and friends are warmly invited.",
-      image: "/graduation.jpeg",
+      image: "/event3.jpeg",
     },
   ];
 
@@ -105,3 +105,21 @@ export default function EventsPage() {
     </section>
   );
 }
+
+
+
+
+
+// What we want on the Home Page
+
+// On the home page, we don’t want all events, just the recent ones, arranged nicely in a grid or design layout.
+
+// So the workflow is:
+
+// Pull all events from the EventsPage source (like events array).
+
+// Sort them by date descending (so the most recent ones are first).
+
+// Pick the top few (like top 3 or 4) for the home page.
+
+// Render only the images in a nice grid layout (no titles or descriptions for now, we can add later if needed).
