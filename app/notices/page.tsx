@@ -1,4 +1,4 @@
-import ImageGallery from "@/components/imageGallery/imagegallery";
+import ImageGallery from "@/components/ImageGallery/Imagegallery";
 
 export default function NoticesPage() {
   const overallNotices = [

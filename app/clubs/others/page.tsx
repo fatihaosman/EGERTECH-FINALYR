@@ -1,5 +1,5 @@
-import CategoryHero from "@/components/clubs/categoryHero";
-import ClubsGrid from "@/components/clubs/clubsGrid";
+import CategoryHero from "@/components/clubs/CategoryHero";
+import ClubsGrid from "@/components/clubs/ClubsGrid";
 const otherClubs = [
   {
     name: "Peer Counseling",

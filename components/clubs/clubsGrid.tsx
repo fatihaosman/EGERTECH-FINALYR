@@ -1,4 +1,4 @@
-import ClubCard from '@/components/clubs/clubCard';
+import ClubCard from '@/components/clubs/ClubCard';
 
 interface Club {
   name: string;

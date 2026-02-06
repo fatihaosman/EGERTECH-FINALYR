@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ImageGallery from "@/components/imageGallery/imagegallery";
+import ImageGallery from "@/components/ImageGallery/Imagegallery";
 import Image from "next/image";
 export default function StudentSupportPage() {
   const scholarships = [
