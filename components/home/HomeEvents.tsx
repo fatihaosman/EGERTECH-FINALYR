@@ -25,7 +25,7 @@ export default function HomeEvents({ events }: HomeEventsProps) {
           Upcoming Events at Egerton University
         </h2>
       {/* Light gradient background, smaller blur */}
-      <div className="absolute inset-0 max-w-6xl mx-auto rounded-3xl bg-gradient-to-r from-brand/40 via-yellow-100/30 to-brand-danger/40 blur-2xl -z-10" />
+      <div className="absolute inset-0 max-w-5xl mx-auto rounded-3xl bg-gradient-to-r from-brand/30 via-yellow-100/20 to-brand-danger/30 blur-2xl -z-10" />
 
       <div className="max-w-lg md:max-w-2xl mx-auto px-4">
        

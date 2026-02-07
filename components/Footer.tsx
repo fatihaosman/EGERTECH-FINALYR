@@ -58,7 +58,7 @@ export default function Footer() {
         {/* Third column */}
         <div className="text-center md:text-right space-y-2">
           <p>📧 info@egerton.ac.ke</p>
-          <p>📞 +254 7XX XXX XXX</p>
+          <p>📞 +254 718 164 653</p>
           <p>🕒 Mon–Fri: 8am – 5pm</p>
         </div>
 

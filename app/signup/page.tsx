@@ -6,12 +6,12 @@ import { useRouter } from "next/navigation";
 export default function SignPage() {
     const router = useRouter();
     // Redirect if already logged in
-  useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      router.replace("/");
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("authToken");
+  //   if (token) {
+  //     router.replace("/");
+  //   }
+  // }, [router]);
   return (
     <section className="w-full min-h-screen bg-white flex items-center justify-center px-4">
       <div className="w-full max-w-md space-y-8 ">
