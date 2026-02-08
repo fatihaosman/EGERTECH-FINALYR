@@ -135,7 +135,7 @@ useEffect(() => {
 
       </div>
       {menuOpen && (
-  <div className="md:hidden px-4 pb-4 flex flex-col gap-4 border-b border-gray-300 bg-brand">
+  <div className="md:hidden px-4 pb-4 flex flex-col gap-4 border-b border-gray-300 bg-brand/10">
     <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
     <Link href="/clubs" onClick={() => setMenuOpen(false)}>Clubs</Link>
     <Link href="/notices" onClick={() => setMenuOpen(false)}>Notices</Link>
