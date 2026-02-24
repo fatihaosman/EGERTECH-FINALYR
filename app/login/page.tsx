@@ -1,9 +1,16 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function LoginPage() {
   return (
-    <section className="w-full min-h-screen bg-white flex items-center justify-center px-4">
+   
+
+  <section className="min-h-screen flex">
+    {/* LEFT - Login */}
+    <div className="w-full md:w-1/2 flex items-center justify-center">
+      {/* Your existing login code */}
+       <section className="w-full min-h-screen bg-white flex items-center justify-center px-4 ">
       <div className="w-full max-w-md space-y-8 ">
 
         {/* Heading */}
@@ -13,7 +20,7 @@ export default function LoginPage() {
 
         {/* Form */}
         <form
-          className="space-y-6 bg-brand/5 px-6 py-4 rounded-lg font-body"
+          className="space-y-6 bg-brand/5 px-6 py-20 rounded-lg font-body"
           onSubmit={async (e) => {
             e.preventDefault();
 
@@ -95,5 +102,19 @@ export default function LoginPage() {
 
       </div>
     </section>
+    </div>
+
+    {/* RIGHT - Image */}
+    <div className="hidden md:block md:w-1/2 relative h-[80vh]">
+  <Image
+    src="/login.png"
+    alt="University students collaborating"
+    fill
+    className="object-cover"
+    priority
+   
+  />
+</div>
+ </section>
   );
 }
