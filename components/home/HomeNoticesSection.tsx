@@ -1,21 +1,52 @@
+"use client";
 
+import { useEffect, useState } from "react";
 import ImageGallery from "@/components/ImgGallery/ImgGallery";
-import { overallNotices, scienceNotices } from "@/lib/Notices";
+
+type NoticeType = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  created_at: string;
+};
 
 export default function HomeNotices() {
-  // 1. Combine all notices
-  const allNotices = [...overallNotices, ...scienceNotices];
+  const [recentNotices, setRecentNotices] = useState<
+    { src: string; date: string; alt: string }[]
+  >([]);
 
-  // 2. Sort by most recent date
-  const recentNotices = allNotices
-    .sort(
-      (a, b) =>
-        new Date(b.date).getTime() - new Date(a.date).getTime()
-    )
-    .slice(0, 6); // show only latest 6
+  useEffect(() => {
+    const fetchNotices = async () => {
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/posts/notices/");
+        const data = await res.json();
+
+        const formatted = data
+          .map((notice: NoticeType) => ({
+            src: notice.image,
+            date: new Date(notice.created_at).toLocaleDateString("en-US", {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            }),
+            alt: notice.title || "Campus Notice",
+            rawDate: new Date(notice.created_at),
+          }))
+          .sort((a: { rawDate: Date }, b: { rawDate: Date }) => b.rawDate.getTime() - a.rawDate.getTime())
+          .slice(0, 6);
+
+        setRecentNotices(formatted);
+      } catch (err) {
+        console.error("Failed to load notices", err);
+      }
+    };
+
+    fetchNotices();
+  }, []);
 
   return (
-    <section className="w-full bg-white ">
+    <section className="w-full bg-white">
       <div className="max-w-6xl mx-auto px-4 space-y-6">
 
         {/* Section header */}

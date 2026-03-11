@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { IoChevronBack, IoChevronForward } from "react-icons/io5";
 
 interface GalleryItem {
@@ -29,6 +28,7 @@ export default function ImageGallery({ items }: ImageGalleryProps) {
     <div className="relative w-full bg-brand-accent p-4 rounded-lg">
       {/* Horizontal scroll row */}
       <div className="flex items-center overflow-hidden relative">
+
         {/* Left Arrow */}
         <button
           onClick={scrollLeft}
@@ -48,11 +48,9 @@ export default function ImageGallery({ items }: ImageGalleryProps) {
               className="relative cursor-pointer flex-shrink-0 w-[100px] sm:w-[180px]"
               onClick={() => setZoomIndex(idx)}
             >
-              <Image
+              <img
                 src={item.src}
                 alt={item.alt}
-                width={180}
-                height={180}
                 className="rounded-md object-cover w-full h-[180px]"
               />
               <span className="block mt-1 text-xs text-white text-center font-semibold">
@@ -72,29 +70,25 @@ export default function ImageGallery({ items }: ImageGalleryProps) {
       </div>
 
       {/* Lightbox */}
-      {/* Lightbox */}
-{zoomIndex !== null && (
-  <div
-    className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-  >
-    {/* Close button */}
-    <button
-      onClick={() => setZoomIndex(null)}
-      className="absolute top-6 right-6 z-60 text-white bg-gray-800 bg-opacity-70 hover:bg-opacity-100 rounded-full p-2 text-2xl font-bold shadow-md"
-    >
-      ×
-    </button>
+      {zoomIndex !== null && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
 
-    {/* Zoomed image */}
-    <Image
-      src={items[zoomIndex].src}
-      alt={items[zoomIndex].alt}
-      width={600}
-      height={600}
-      className="rounded-lg object-contain max-h-[80vh]"
-    />
-  </div>
-)}
+          {/* Close button */}
+          <button
+            onClick={() => setZoomIndex(null)}
+            className="absolute top-6 right-6 z-60 text-white bg-gray-800 bg-opacity-70 hover:bg-opacity-100 rounded-full p-2 text-2xl font-bold shadow-md"
+          >
+            ×
+          </button>
+
+          {/* Zoomed image */}
+          <img
+            src={items[zoomIndex].src}
+            alt={items[zoomIndex].alt}
+            className="rounded-lg object-contain max-h-[80vh]"
+          />
+        </div>
+      )}
     </div>
   );
 }
