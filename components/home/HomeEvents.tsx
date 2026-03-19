@@ -1,6 +1,17 @@
 "use client";
 
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
+
+type BackendEvent = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  created_at: string;
+};
 
 type EventItem = {
   date: string;
@@ -8,11 +19,31 @@ type EventItem = {
   alt?: string;
 };
 
-interface HomeEventsProps {
-  events: EventItem[];
-}
+export default function HomeEvents() {
+  const [events, setEvents] = useState<EventItem[]>([]);
 
-export default function HomeEvents({ events }: HomeEventsProps) {
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/posts/events/");
+        const data = await res.json();
+
+        const formatted = data.map((event: BackendEvent) => ({
+          date: event.created_at,
+          image: event.image,
+          alt: event.title,
+        }));
+
+        setEvents(formatted);
+      } catch (err) {
+        console.error("Failed to load events", err);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
+  // sort newest first
   const recentEvents = [...events].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
@@ -43,6 +74,7 @@ export default function HomeEvents({ events }: HomeEventsProps) {
                 width={400}
                 height={300}
                 className="w-full h-full object-contain"
+                unoptimized
               />
             </div>
           ))}

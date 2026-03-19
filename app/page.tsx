@@ -14,7 +14,7 @@ export default function Home() {
       
       <Hero />
       <HomeNoticesSection />
-      <HomeEvents events={eventsData} />
+      <HomeEvents />
        <HomeClubsSection clubs={clubs} />
     </main>
   );

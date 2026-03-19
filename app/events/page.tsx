@@ -1,63 +1,64 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
+type EventType = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  created_at: string;
+};
+
 export default function EventsPage() {
-  const events = [
-    {
-      date: "Mon, Mar 25, 2026",
-      title: "Cultural Week",
-      description:
-        "Celebrate the vibrant traditions of our campus! Cultural Week brings together music, dance, art, and performances from various student clubs. Open to everyone on campus.",
-      image: "/event1.jpeg",
-    },
-    {
-      date: "Fri, Apr 10, 2026",
-      title: "Computer Science Hackathon",
-      description:
-        "A 48-hour coding challenge for students passionate about tech. Teams will compete to build innovative software solutions. While organized by the CS department, students from all fields are welcome to participate.",
-      image: "/event2.jpeg",
-    },
-    {
-      date: "Sat, Jun 20, 2026",
-      title: "50th Graduation Ceremony",
-      description:
-        "Join us in celebrating the Class of 2026! Graduation day will include speeches, awards, and the conferring of degrees. Family and friends are warmly invited.",
-      image: "/event3.jpeg",
-    },
-  ];
+  const [events, setEvents] = useState<EventType[]>([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/posts/events/");
+        const data = await res.json();
+        setEvents(data);
+      } catch (err) {
+        console.error("Failed to load events", err);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   function formatEventDate(dateStr: string) {
-  const date = new Date(dateStr);
-  // Format for Google Calendar: YYYYMMDD
-  const yyyy = date.getFullYear();
-  const mm = String(date.getMonth() + 1).padStart(2, "0");
-  const dd = String(date.getDate()).padStart(2, "0");
-  
-  // For all-day events, Google uses YYYYMMDD/YYYYMMDD (end date is next day)
-  const nextDay = new Date(date);
-  nextDay.setDate(date.getDate() + 1);
-  const ddNext = String(nextDay.getDate()).padStart(2, "0");
-  const mmNext = String(nextDay.getMonth() + 1).padStart(2, "0");
+    const date = new Date(dateStr);
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const dd = String(date.getDate()).padStart(2, "0");
 
-  return `${yyyy}${mm}${dd}/${yyyy}${mmNext}${ddNext}`;
-}
+    const nextDay = new Date(date);
+    nextDay.setDate(date.getDate() + 1);
+    const ddNext = String(nextDay.getDate()).padStart(2, "0");
+    const mmNext = String(nextDay.getMonth() + 1).padStart(2, "0");
 
+    return `${yyyy}${mm}${dd}/${yyyy}${mmNext}${ddNext}`;
+  }
 
   return (
     <section className="w-full min-h-screen bg-white py-4 sm:py-8">
       <div className="max-w-6xl mx-auto px-4 flex flex-col gap-10 sm:gap-12">
-
-        {events.map((event, idx) => (
+        {events.map((event) => (
           <div
-            key={idx}
+            key={event.id}
             className="flex flex-col lg:flex-row gap-2 items-center border-b border-gray-300 pb-2"
           >
             {/* LEFT: Date + Google Calendar */}
-            <div className="relative flex flex-col items-start lg:w-1/4 text-left">
-                <span className="text-sm font-semibold text-gray-600 z-10">{event.date}</span>
-                <a
+            <div className="relative flex flex-col items-start lg:w-1/4 text-left  mt-6 lg:mt-0">
+              <span className="text-sm font-semibold text-gray-600 z-10">
+                {new Date(event.created_at).toDateString()}
+              </span>
+              <a
                 href={`https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
                   event.title
-                )}&dates=${formatEventDate(event.date)}&details=${encodeURIComponent(
+                )}&dates=${formatEventDate(event.created_at)}&details=${encodeURIComponent(
                   event.description
                 )}`}
                 target="_blank"
@@ -67,59 +68,43 @@ export default function EventsPage() {
                 Add to Google Calendar
               </a>
 
-
-                {/* Slanted Rectangle under the date */}
-                <Image
-                  src="/slantrectangle.png"
-                  alt="Decorative rectangle"
-                  width={160}
-                  height={20}
-                  className="absolute -bottom-10 left-0 lg:-bottom-8 z-0"
-                />
+              {/* Slanted Rectangle under the date */}
+              <Image
+                src="/slantrectangle.png"
+                alt="Decorative rectangle"
+                width={160}
+                height={30}
+                className="absolute -bottom-10 left-0 lg:-bottom-8 z-0"
+              />
             </div>
 
-             {/* VERTICAL LINE */}
-  <div className="hidden lg:block w-px bg-gray-300 self-stretch mx-0"></div>
+            
 
+            {/* VERTICAL LINE */}
+            <div className="hidden lg:block w-px bg-gray-300 self-stretch mx-0"></div>
 
             {/* CENTER: Heading + Description */}
-            <div className="flex-1 lg:mx-6">
-              <h2 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">{event.title}</h2> 
+            <div className="flex-1 mt-3 lg:mx-6">
+              <h2 className="text-lg sm:text-xl font-semibold mb-1 sm:mb-2">
+                {event.title}
+              </h2>
               <p className="text-sm sm:text-base text-gray-700">{event.description}</p>
             </div>
 
             {/* RIGHT: Event Poster */}
-            <div className="lg:w-1/6 lg:mt-0">
+            <div className="w-100 lg:w-1/6 mt-3 mb-4 lg:mt-0">
               <Image
-                src={event.image}
+                src={event.image} // full backend URL
                 alt={event.title}
                 width={100}
                 height={100}
                 className="rounded-lg object-cover w-full"
+                unoptimized
               />
             </div>
           </div>
         ))}
-
       </div>
     </section>
   );
 }
-
-
-
-
-
-// What we want on the Home Page
-
-// On the home page, we don’t want all events, just the recent ones, arranged nicely in a grid or design layout.
-
-// So the workflow is:
-
-// Pull all events from the EventsPage source (like events array).
-
-// Sort them by date descending (so the most recent ones are first).
-
-// Pick the top few (like top 3 or 4) for the home page.
-
-// Render only the images in a nice grid layout (no titles or descriptions for now, we can add later if needed).
