@@ -1,29 +1,57 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import ImageGallery from "@/components/ImgGallery/ImgGallery";
 import Image from "next/image";
+
+type ScholarshipType = {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  created_at: string;
+};
+
+type GalleryItem = {
+  src: string;
+  date: string;
+  alt: string;
+};
+
 export default function StudentSupportPage() {
-  const scholarships = [
-    {
-      src: "/notice1.png",
-      date: "Mar 20, 2026",
-      alt: "Scholarship notice",
-    },
-    {
-      src: "/notice2.png",
-      date: "Mar 22, 2026",
-      alt: "Bursary announcement",
-    },
-    {
-      src: "/notice3.png",
-      date: "Mar 24, 2026",
-      alt: "Financial aid update",
-    },
-    {
-      src: "/notice4.png",
-      date: "Mar 26, 2026",
-      alt: "Student funding notice",
-    },
-  ];
+  const [scholarships, setScholarships] = useState<GalleryItem[]>([]);
+
+  useEffect(() => {
+    const fetchScholarships = async () => {
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/posts/scholarships/");
+        const data = await res.json();
+
+        const formatted: GalleryItem[] = data.map((item: ScholarshipType) => ({
+          src: item.image, // full backend URL
+          date: new Date(item.created_at).toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }),
+          alt: item.title || "Scholarship notice",
+        }));
+
+        // sort newest first (optional but good)
+        const sorted = formatted.sort(
+          (a, b) =>
+            new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+
+        setScholarships(sorted);
+      } catch (err) {
+        console.error("Failed to load scholarships", err);
+      }
+    };
+
+    fetchScholarships();
+  }, []);
 
   return (
     <section className="w-full min-h-screen bg-white py-8">
