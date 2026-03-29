@@ -4,6 +4,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+// ✅ Import Lucide icons
+import { User, Lock } from "lucide-react";
+
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -20,7 +23,7 @@ export default function LoginPage() {
     const formData = new FormData(form);
 
     const data = {
-      email: formData.get("registration_number"), // <- we’ll use email for login in backend
+      email: formData.get("registration_number"),
       password: formData.get("password"),
     };
 
@@ -34,19 +37,11 @@ export default function LoginPage() {
       const result = await res.json();
 
       if (res.ok || result.access) {
-        // ✅ Store JWT token for authenticated requests
         localStorage.setItem("authToken", result.access);
-
-        // ✅ Show toast notification
         setToast({ message: `Welcome back!`, visible: true });
-
-        // ✅ Auto-hide after 3 seconds
         setTimeout(() => setToast({ message: "", visible: false }), 3000);
-
-        // ✅ Redirect to dashboard after 1.5s
         setTimeout(() => router.push("/"), 1500);
       } else {
-        // Handle login errors nicely
         let errorMsg = "";
         for (const key in result) {
           errorMsg += `${key}: ${result[key]}\n`;
@@ -62,84 +57,111 @@ export default function LoginPage() {
   };
 
   return (
-    <section className="min-h-screen flex">
-      {/* LEFT - Login */}
-      <div className="w-full md:w-1/2 flex items-center justify-center">
-        <section className="w-full min-h-screen bg-white flex items-center justify-center px-4">
-          <div className="w-full max-w-md space-y-8 ">
-            {/* Heading */}
-            <h1 className="text-xl sm:text-2xl font-heading font-semibold text-black text-center">
-              Student Login
-            </h1>
+  <section className="min-h-screen flex bg-[#F9F9F9] relative overflow-hidden items-center justify-center">
+  {/* Background Pattern */}
+  <div className="absolute inset-0">
+    <Image
+      src="/background-pattern.png"
+      alt="Background pattern"
+      fill
+      className="object-cover"
+    />
+  </div>
 
-            {/* Form */}
-            <form
-              className="space-y-6 bg-brand/5 px-6 py-30 rounded-lg font-body"
-              onSubmit={handleLogin}
-            >
-              <div className="flex items-center gap-4">
-                <label className="w-32 text-sm font-semibold text-black">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="registration_number"
-                  className="line-input flex-1"
-                  placeholder="Enter email"
-                />
+  {/* Login Form */}
+  <div className="w-full flex items-center justify-center z-10">
+    <div className="relative w-full max-w-md bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden">
+      
+      {/* Top Header with Logo */}
+      <div className="bg-brand py-2 px-6 flex flex-col items-center">
+        <Image
+          src="/logo.png" // <-- your Egerton logo
+          alt="Egerton Logo"
+          width={80}
+          height={80}
+          className="mb-1"
+        />
+        <h1 className="text-2xl font-semibold text-white text-center">
+          Student Login
+        </h1>
+      </div>
+
+      {/* Form Body */}
+      <div className="p-8 space-y-6">
+        <form className="space-y-5" onSubmit={handleLogin}>
+          {/* Registration No */}
+          <div className="flex flex-col relative">
+            <label className="text-sm font-medium text-gray-700 mb-1">
+              Registration No
+            </label>
+            <div className="relative">
+              {/* Icon */}
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <User className="w-5 h-5 text-green-500" />
               </div>
-
-              <div className="flex items-center gap-4">
-                <label className="w-32 text-sm font-semibold text-black">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  className="line-input flex-1"
-                  placeholder="Enter password"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full mt-6 bg-brand text-white py-2 rounded-md text-sm font-semibold hover:opacity-90 transition"
-                disabled={loading}
-              >
-                {loading ? "Logging in..." : "Login"}
-              </button>
-            </form>
-
-            <div className="text-center text-sm text-gray-600">
-              Don’t have an account?{" "}
-              <Link
-                href="/signup"
-                className="text-brand-accent font-medium hover:underline"
-              >
-                Sign up
-              </Link>
+              <input
+                type="email"
+                name="registration_number"
+                placeholder="Enter email"
+                className="border border-gray-300 rounded-lg pl-10 pr-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-accent"
+              />
             </div>
           </div>
-        </section>
-      </div>
 
-      {/* RIGHT - Image */}
-      <div className="hidden md:block md:w-1/2 relative h-[80vh]">
-        <Image
-          src="/login.png"
-          alt="University students collaborating"
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
+          {/* Password */}
+          <div className="flex flex-col relative">
+            <label className="text-sm font-medium text-gray-700 mb-1">
+              Password
+            </label>
+            <div className="relative">
+              {/* Icon */}
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Lock className="w-5 h-5 text-green-500" />
+              </div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                className="border border-gray-300 rounded-lg pl-10 pr-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-brand-accent"
+              />
+            </div>
+          </div>
 
-      {/* ✅ Toast Notification - Top Right */}
-      {toast.visible && (
-        <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-in">
-          {toast.message}
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-brand text-white py-2 rounded-lg font-semibold hover:opacity-90 transition"
+          >
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        {/* Sign Up Link */}
+        <div className="text-center text-sm text-gray-600">
+          Don’t have an account?{" "}
+          <Link
+            href="/signup"
+            className="text-green-600 font-medium hover:underline"
+          >
+            Sign up
+          </Link>
         </div>
-      )}
-    </section>
-  );
+
+        {/* Welcome Text (inside card, bottom) */}
+        <p className="text-center text-gray-500 text-sm mt-4 font-body font-medium">
+          Welcome back! Login to access all your campus resources you need.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  {/* Toast Notification */}
+  {toast.visible && (
+    <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-slide-in">
+      {toast.message}
+    </div>
+  )}
+</section>
+);
 }

@@ -1,5 +1,9 @@
-"use client";
 
+"use client";
+import { 
+  Clock, CheckCircle, XCircle,
+  Home, Wallet, Utensils, BookOpen
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import ImageGallery from "@/components/ImgGallery/ImgGallery";
@@ -81,10 +85,10 @@ useEffect(() => {
 
   return (
     <section className="w-full min-h-screen bg-white py-8">
-      <div className="max-w-6xl mx-auto px-4 space-y-6">
+      <div className="max-w-6xl mx-auto px-4 space-y-16 mb-30">
 
         {/* PAGE HEADING */}
-        <h1 className="text-xl sm:text-2xl font-heading font-semibold text-black">
+        <h1 className="text-xl sm:text-2xl font-heading font-semibold text-black mb-4">
           Scholarships & Bursaries
         </h1>
 
@@ -96,7 +100,7 @@ useEffect(() => {
 
   {/* CONTENT */}
   <div className="relative z-10 space-y-4">
-    <h2 className="text-lg sm:text-xl font-semibold text-black">
+    <h2 className="text-lg sm:text-xl font-semibold text-black mb-2">
       Having trouble with fees or payments?
     </h2>
 
@@ -108,7 +112,7 @@ useEffect(() => {
 
     <Link
       href="/support/form"
-      className="inline-block mt-2 bg-brand-danger text-white px-6 py-2 rounded-md text-sm font-semibold hover:opacity-90 transition"
+      className="inline-block mt-4 bg-brand-danger text-white px-6 py-2 rounded-md text-sm font-semibold hover:opacity-90 transition"
     >
       Fill Support Form
     </Link>
@@ -120,14 +124,14 @@ useEffect(() => {
     alt=""
     width={140}
     height={20}
-    className="absolute bottom-10 left-0 z-0 pointer-events-none"
+    className="absolute bottom-9 left-0 z-0 pointer-events-none"
   />
 </div>
 
 {/* USER SUBMITTED REQUESTS */}
 
 {requests.length > 0 && (
-  <div className="mt-10 space-y-6 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+  <div className="mt-10 space-y-4 bg-white p-6 rounded-lg  border border-gray-200">
     <h3 className="text-lg sm:text-xl font-semibold text-black">
       Your Submitted Requests
     </h3>
@@ -141,9 +145,38 @@ useEffect(() => {
             key={req.id}
             className="flex items-center gap-4 p-5 bg-white rounded-xl shadow-sm border border-gray-200"
           >
-            {/* ICON */}
-            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-green-100">
-              <span className="text-lg">🏠</span>
+           {/* ICON */}
+            <div
+              className={`w-12 h-12 flex items-center justify-center rounded-full ${
+                status === "accepted"
+                  ? "bg-green-100"
+                  : status === "declined"
+                  ? "bg-red-100"
+                  : "bg-yellow-100"
+              }`}
+            >
+              <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-100">
+  {
+    (() => {
+      const type = req.type_of_need?.toLowerCase();
+
+      if (type?.includes("accommodation")) {
+        return <Home className="text-blue-600" size={20} />;
+      }
+      if (type?.includes("tuition") || type?.includes("fees")) {
+        return <Wallet className="text-purple-600" size={20} />;
+      }
+      if (type?.includes("meal") || type?.includes("food")) {
+        return <Utensils className="text-orange-600" size={20} />;
+      }
+      if (type?.includes("books")) {
+        return <BookOpen className="text-indigo-600" size={20} />;
+      }
+
+      return <Clock className="text-gray-600" size={20} />;
+    })()
+  }
+</div>
             </div>
 
             {/* CONTENT */}
@@ -174,9 +207,9 @@ useEffect(() => {
                       : "bg-yellow-100 text-yellow-600"
                   }`}
                 >
-                  {status === "accepted" && "✔"}
-                  {status === "declined" && "✖"}
-                  {status === "pending" && "⏳"}
+                  {status === "accepted" && <CheckCircle size={12} />}
+                  {status === "declined" && <XCircle size={12} />}
+                  {status === "pending" && <Clock size={12} />}
 
                   {status === "accepted"
                     ? "Reviewed"
