@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { jwtDecode } from "jwt-decode";
 
 // ✅ Import Lucide icons
 import { User, Lock } from "lucide-react";
@@ -38,6 +39,23 @@ export default function LoginPage() {
 
       if (res.ok || result.access) {
         localStorage.setItem("authToken", result.access);
+         // ✅ Decode token to get user info
+  type DecodedToken = {
+  full_name: string;
+  email: string;
+  registration_number: string;
+};
+
+const decoded = jwtDecode<DecodedToken>(result.access);
+
+  const user = {
+    name: decoded.full_name,
+    email: decoded.email,
+    regNo: decoded.registration_number,
+  };
+
+  localStorage.setItem("user", JSON.stringify(user));
+
         setToast({ message: `Welcome back!`, visible: true });
         setTimeout(() => setToast({ message: "", visible: false }), 3000);
         setTimeout(() => router.push("/"), 1500);

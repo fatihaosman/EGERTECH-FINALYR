@@ -1,22 +1,48 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import CategoryHero from "@/components/clubs/Category";
 import ClubsGrid from "@/components/clubs/ClubGrid";
-const otherClubs = [
-  {
-    name: "Peer Counseling",
-    description:
-      "The Peer Counseling group at Egerton University provides a safe and supportive space for students who may be facing emotional, academic, or personal challenges. The program focuses on helping students talk through their concerns with trained peers who understand campus life. Students can reach out for support, guidance, or simply someone to listen, promoting mental well-being and a supportive student community.",
-    href: "/clubs/others/peer-counseling",
-  },
-];
+
+type Club = {
+  name: string;
+  description: string;
+  href: string;
+};
+
 export default function OthersPage() {
+  const [clubs, setClubs] = useState<Club[]>([]);
+
+  useEffect(() => {
+    const fetchClubs = async () => {
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/posts/clubs/");
+        const data = await res.json();
+
+        const others = data
+          .filter((club: { category: string }) => club.category === "others")
+          .map((club: { name: string; description: string }) => ({
+            name: club.name,
+            description: club.description,
+            href: `/clubs/others/${club.name.toLowerCase()}`,
+          }));
+
+        setClubs(others);
+      } catch (err) {
+        console.error("Failed to load other clubs", err);
+      }
+    };
+
+    fetchClubs();
+  }, []);
+
   return (
     <main className="pt-2">
       <CategoryHero
         title="Other Student Support Groups"
         image="/peers-main.jpg"
       />
-
-      <ClubsGrid clubs={otherClubs} />
+      <ClubsGrid clubs={clubs} />
     </main>
   );
 }

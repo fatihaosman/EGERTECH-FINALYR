@@ -1,3 +1,61 @@
+
+
+"use client";
+
+import { useEffect, useState } from "react";
+import CategoryHero from "@/components/clubs/Category";
+import ClubsGrid from "@/components/clubs/ClubGrid";
+
+type Club = {
+  name: string;
+  description: string;
+  href: string;
+};
+
+type ClubAPI = {
+  id: number;
+  name: string;
+  description: string;
+  category: string;
+  image: string;
+  created_at: string;
+};
+
+export default function SportsPage() {
+  const [clubs, setClubs] = useState<Club[]>([]);
+
+  useEffect(() => {
+    const fetchClubs = async () => {
+      try {
+        const res = await fetch("http://127.0.0.1:8000/api/posts/clubs/");
+        const data: ClubAPI[] = await res.json();
+
+        const sports = data
+          .filter((club) => club.category === "sports")
+          .map((club) => ({
+            name: club.name,
+            description: club.description,
+            href: `/clubs/sports/${club.name.toLowerCase()}`,
+          }));
+
+        setClubs(sports);
+      } catch (err) {
+        console.error("Failed to load clubs", err);
+      }
+    };
+
+    fetchClubs();
+  }, []);
+
+  return (
+    <main className="pt-2">
+      <CategoryHero title="Sports Clubs" image="/Image.png" />
+      <ClubsGrid clubs={clubs} />
+    </main>
+  );
+}
+
+
 // export default function SportsPage() {
 //   return <h1>Sports</h1>;
 // }
@@ -94,52 +152,37 @@
 // }
 
 
-import CategoryHero from '@/components/clubs/Category';
-import ClubsGrid from "@/components/clubs/ClubGrid";
 
 
-const sportsClubs = [
-  {
-    name: "Football",
-    description:
-      "The Football Club brings together students passionate about football and teamwork. Training and matches are held at the Pavilion sports ground, offering a welcoming environment for all skill levels to develop, compete, and enjoy the beautiful game.",
-    href: "/clubs/sports/football",
-  },
-  {
-    name: "Cricket",
-    description:
-     "The Cricket Club is open to students who love cricket and team sports. All activities take place on the Pavilion sports ground, providing a fun and competitive environment for students to improve their skills and enjoy the spirit of the game.",
-    href: "/clubs/sports/cricket",
-  },
-  {
-    name: "Tennis",
-    description:
-     "The Tennis Club is for students who enjoy competitive or recreational tennis. Sessions are held on the dedicated tennis courts next to the Pavilion sports ground, offering ample space and professional facilities to practice, play matches, and socialize with fellow tennis enthusiasts.",
-    href: "/clubs/sports/tennis",
-  },
-  {
-    name: "Karate",
-    description:
-      "The Karate Club offers an inclusive environment for students of all levels to learn and practice martial arts. Training is held at the Student Center, open to both boys and girls, focusing on skill development, discipline, and personal growth.",
-    href: "/clubs/sports/karate",
-  },
-  {
-    name: "Basketball",
-    description:
-     "The Basketball Club welcomes students eager to play and learn basketball. Activities take place on the same courts as the tennis area next to the Pavilion, providing a supportive environment to practice skills, play games, and enjoy team sports.",
-    href: "/clubs/sports/basketball",
-  },
-];
-
-export default function SportsPage() {
-  return (
-    <main className="pt-2">
-      <CategoryHero
-        title="Sports Clubs"
-        image="/Image.png"
-      />
-
-      <ClubsGrid clubs={sportsClubs} />
-    </main>
-  );
-}
+// const sportsClubs = [
+//   {
+//     name: "Football",
+//     description:
+//       "The Football Club brings together students passionate about football and teamwork. Training and matches are held at the Pavilion sports ground, offering a welcoming environment for all skill levels to develop, compete, and enjoy the beautiful game.",
+//     href: "/clubs/sports/football",
+//   },
+//   {
+//     name: "Cricket",
+//     description:
+//      "The Cricket Club is open to students who love cricket and team sports. All activities take place on the Pavilion sports ground, providing a fun and competitive environment for students to improve their skills and enjoy the spirit of the game.",
+//     href: "/clubs/sports/cricket",
+//   },
+//   {
+//     name: "Tennis",
+//     description:
+//      "The Tennis Club is for students who enjoy competitive or recreational tennis. Sessions are held on the dedicated tennis courts next to the Pavilion sports ground, offering ample space and professional facilities to practice, play matches, and socialize with fellow tennis enthusiasts.",
+//     href: "/clubs/sports/tennis",
+//   },
+//   {
+//     name: "Karate",
+//     description:
+//       "The Karate Club offers an inclusive environment for students of all levels to learn and practice martial arts. Training is held at the Student Center, open to both boys and girls, focusing on skill development, discipline, and personal growth.",
+//     href: "/clubs/sports/karate",
+//   },
+//   {
+//     name: "Basketball",
+//     description:
+//      "The Basketball Club welcomes students eager to play and learn basketball. Activities take place on the same courts as the tennis area next to the Pavilion, providing a supportive environment to practice skills, play games, and enjoy team sports.",
+//     href: "/clubs/sports/basketball",
+//   },
+// ];
