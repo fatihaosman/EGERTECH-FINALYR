@@ -109,6 +109,9 @@ export default function Navbar() {
                 <Link href="/about" onClick={() => setOpen(false)} className="px-4 py-2 hover:bg-brand hover:text-white">
                   About Egerton
                 </Link>
+                <Link href="/faq" onClick={() => setOpen(false)} className="px-4 py-2 hover:bg-brand hover:text-white">
+                  FAQ
+                </Link>
               </div>
             )}
           </div>
@@ -184,6 +187,7 @@ export default function Navbar() {
           <Link href="/support" onClick={() => setMenuOpen(false)}>Student Opportunities</Link>
           <Link href="/lost-found" onClick={() => setMenuOpen(false)}>Lost & Found</Link>
           <Link href="/about" onClick={() => setMenuOpen(false)}>About Egerton</Link>
+          <Link href="/faq" onClick={() => setMenuOpen(false)}>FAQ</Link>
 
           {!isLoggedIn ? (
             <Link
