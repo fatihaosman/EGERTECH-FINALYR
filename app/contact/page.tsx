@@ -14,13 +14,29 @@ export default function SupportPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // You can send this data to your backend here
-    console.log("Support request submitted:", formData);
-    alert("Your message has been sent!");
-    setFormData({ name: "", email: "", subject: "", message: "" });
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const res = await fetch("http://127.0.0.1:8000/api/support/messages/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      alert("Your message has been sent!");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } else {
+      alert("Failed to send message.");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error sending message.");
+  }
+};
 
   return (
     <section className="w-full min-h-screen bg-white py-12">

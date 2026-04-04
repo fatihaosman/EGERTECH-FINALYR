@@ -35,17 +35,33 @@ export default function Navbar() {
 
   // ✅ Load auth + user (CLIENT ONLY)
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    const storedUser = localStorage.getItem("user");
+  const token = localStorage.getItem("authToken");
 
-    setIsLoggedIn(token !== null);
-
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-
+  if (!token) {
+    setIsLoggedIn(false);
     setMounted(true);
-  }, []);
+    return;
+  }
+
+  setIsLoggedIn(true);
+
+  // 🔥 Fetch real user from backend
+  fetch("http://127.0.0.1:8000/api/user/profile/", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      setUser(data);
+    })
+    .catch(() => {
+      // token invalid → logout
+      localStorage.removeItem("authToken");
+      setIsLoggedIn(false);
+    })
+    .finally(() => setMounted(true));
+}, []);
 
   // ✅ Close dropdowns when clicking outside
   useEffect(() => {

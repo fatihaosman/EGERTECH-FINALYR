@@ -63,34 +63,42 @@ export default function FAQPage() {
 
         {/* 🔹 FAQ List */}
         <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="border border-gray-300 rounded-lg overflow-hidden"
+        {faqs.map((faq, index) => (
+          <div
+            key={index}
+            className="border border-gray-200 rounded-xl shadow-sm transition"
+          >
+            {/* Question */}
+            <button
+              onClick={() => toggle(index)}
+              className="w-full flex justify-between items-center px-4 py-4 text-left font-medium hover:bg-gray-50"
             >
-              {/* Question */}
-              <button
-                onClick={() => toggle(index)}
-                className="w-full text-left px-4 py-3 flex justify-between items-center font-medium hover:bg-gray-100"
-              >
-                <span>{faq.question}</span>
-                <span className="text-xl">
-                  {openIndex === index ? "−" : "+"}
-                </span>
-              </button>
+              <span>{faq.question}</span>
 
-              {/* Answer */}
-              {openIndex === index && (
-                <div className="px-4 pb-4 text-gray-600 text-sm">
-                  {faq.answer}
-                </div>
-              )}
+              {/* Arrow rotates */}
+              <span
+                className={`transition-transform duration-300 ${
+                  openIndex === index ? "rotate-180" : ""
+                }`}
+              >
+                ▼
+              </span>
+            </button>
+
+            {/* Answer with animation */}
+            <div
+              className={`overflow-hidden transition-all duration-300 ${
+                openIndex === index ? "max-h-40 px-4 pb-4" : "max-h-0 px-4"
+              }`}
+            >
+              <p className="text-gray-600 text-sm">{faq.answer}</p>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
+      </div>
 
         {/* 🔹 Bottom Help */}
-        <div className="mt-10 text-center">
+         <div className="mt-10 text-center bg-gray-50 p-6 rounded-lg">
           <p className="text-gray-600 mb-3">
             Still have questions?
           </p>
