@@ -46,7 +46,7 @@ export default function Navbar() {
   setIsLoggedIn(true);
 
   // 🔥 Fetch real user from backend
-  fetch("http://127.0.0.1:8000/api/user/profile/", {
+  fetch("http://127.0.0.1:8000/api/auth/profile/", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -148,21 +148,28 @@ export default function Navbar() {
                 onClick={() => setProfileOpen((prev) => !prev)}
                 className="bg-green-500 text-white px-4 py-1 rounded-md"
               >
-                {user?.name?.charAt(0) || "P"}
+               {user?.name?.[0] || user?.email?.[0] || "P"}
               </button>
 
               {profileOpen && (
-                <div className="absolute right-0 mt-2 w-56 bg-white border shadow-md rounded-md p-3">
+                <div className="absolute right-0 mt-2 w-86 bg-white border shadow-md rounded-md p-3">
                   
                   {/* User Info */}
                   <div className="border-b pb-2 mb-2">
-                    <div className="font-semibold text-sm">{user?.name}</div>
-                    <div className="text-xs text-gray-500">{user?.regNo}</div>
+                    <div className="font-semibold text-sm">
+                      {user?.name || "No Name"}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {user?.email || "No Email"}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {user?.regNo || "No Reg No"}
+                    </div>
                   </div>
 
                   {/* Actions */}
                   <button
-                    onClick={() => router.push("/change-password")}
+                    onClick={() => router.push("/changepassword")}
                     className="w-full text-left px-2 py-1 hover:bg-gray-100 rounded"
                   >
                     Change Password
